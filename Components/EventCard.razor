@@ -1,0 +1,36 @@
+@code {
+    [Parameter]
+    public string EventName { get; set; }
+
+    [Parameter]
+    public DateTime EventDate { get; set; }
+
+    [Parameter]
+    public decimal Price { get; set; }
+
+    [Parameter]
+    public bool IsAttending { get; set; }
+
+    private void ToggleAttendance()
+    {
+        IsAttending = !IsAttending;
+    }
+}
+
+<div class="event-card">
+    <h3>@EventName</h3>
+    <p>Date: @EventDate.ToShortDateString()</p>
+    <p>Price: @Price.ToString("C")</p>
+    <button @onclick="ToggleAttendance">
+        @(IsAttending ? "Cancel Attendance" : "Attend")
+    </button>
+</div>
+
+<style scoped>
+.event-card {
+    border: 1px solid gray;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+</style>

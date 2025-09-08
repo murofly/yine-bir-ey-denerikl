@@ -1,0 +1,31 @@
+@page "/register"
+<EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText @bind-Value="user.Name" placeholder="Name" />
+    <InputText @bind-Value="user.Email" placeholder="Email" />
+    <InputNumber @bind-Value="user.Age" placeholder="Age" />
+    <button type="submit">Register</button>
+</EditForm>
+
+@code {
+    private User user = new();
+    private void HandleValidSubmit()
+    {
+        // Simulate saving user
+        Console.WriteLine($"User Registered: {user.Name}");
+    }
+
+    public class User
+    {
+        [Required]
+        public string Name { get; set; }
+
+        [Required, EmailAddress]
+        public string Email { get; set; }
+
+        [Range(18, 99)]
+        public int Age { get; set; }
+    }
+}
